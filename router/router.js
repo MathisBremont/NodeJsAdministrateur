@@ -1,3 +1,4 @@
+let LoginController = require('./../controllers/LoginController');
 let HomeController = require('./../controllers/HomeController');
 let ResultatController = require('./../controllers/ResultatController');
 let EcurieController = require('./../controllers/EcurieController');
@@ -28,6 +29,9 @@ module.exports = function (app) {
     app.get('/resultats', ResultatController.ListerResultat);
     app.get('/detailDuResultat/:gpnum',ResultatController.DetailsDuResultat);
 
+
+    //Login
+    app.get('/login',LoginController.VerifIdentifiant);
 
 // tout le reste
     app.get('*', HomeController.NotFound);

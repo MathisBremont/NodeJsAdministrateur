@@ -1,0 +1,21 @@
+<p>Administrateur</p>
+
+<p>Login : </p> <input type="text" id="username" name="username">
+<p>Mot de passe : </p> <input type="password" id="pass" name="password" minlength="8" required>
+
+
+<div>
+    <button type="button"> Annuler </button>
+    <button type="button"> Connexion </button>
+
+</div>
+
+<script>
+    function getValue(){
+        var username = document.getElementsByName("username");
+        var password = document.getElementsByName("password");
+        if(({{identifiant.passwd}}===password)&&{{identifiant.login}}===username){
+            alert("salut");
+        }
+    }
+</script>
