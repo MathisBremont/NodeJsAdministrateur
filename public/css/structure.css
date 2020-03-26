@@ -41,9 +41,10 @@
 	}
 
 	.resultats{
-
-		width: 50%;
+		margin:auto;
+		width: 90%;
 		text-align : center;
+		border:1px solid black;
 
 	}
 
@@ -53,10 +54,31 @@
 
 	}
 
-	.resultats th{
-		font-weight: bold;
-		border: 1px solid black;
+	.enTeteAdmin {
+		margin:auto;
+		text-align: center;
 	}
+
+	.enTeteAdmin p{
+		font-weight: 900;
+	}
+
+
+	.enTeteAdminBis {
+		width: 900px;
+		display:inline-block;
+		margin-bottom: 20px;
+		text-align: center;
+	}
+
+
+
+
+	.petiteImage {
+		width : 10px;
+	}
+
+
 
   #menu {
     text-align: center;
@@ -69,7 +91,7 @@
  	  float:right;
  	  padding:10px;
  	  border:1px solid black;
- 	  margin:10px
+ 	  margin:10px;
  	  -moz-border-radius:15px;
  	  border-radius:15px;
  }

@@ -1,8 +1,30 @@
-<table class="tabpayscir">
+<div class="enTeteAdmin">
+    <img src="/image/cat_circuit.png" alt="drapeau" />
+    <p>Gestion des Circuits</p>
+</div>
+<div class="enTeteAdminBis">
+    <img src="/image/act_add.png" alt="drapeau" />
+    <a href="/ajouterCircuit">Ajouter un circuit</a>
+</div>
+    <table class="resultats">
+    <tr>
+        <td><b>Nom</b></td>
+        <td><b>Longueur</b></td>
+        <td><b>Nombre de spéctateurs</b></td>
+        <td><b>Actions</b></td>
+    </tr>
     {{#each listeCircuit}}
-        <tr><td><img src="/image/pays/{{this.payadrdrap}}" alt="drapeau du pays" class="drapeaux" />
-            <a href="/detailDuCircuit/{{this.cirnum}}">{{this.cirnom}}</a>
-        </td></tr>
+        <tr>
+            <td>{{this.cirnom}}</td>
+            <td>{{this.cirlongueur}}</td>
+            <td>{{this.cirnbspectateurs}}</td>
+            <td>
+                <img src="/image/act_edit.png" alt="drapeau" />
+                <a href="/modifierPilote/{{this.cirnum}}">Modifier</a>
+                <img src="/image/act_delete.png" alt="drapeau" />
+                <a href="/listerPilotes/{{this.cirnum}}">Supprimer</a>
+            </td>
+        </tr>
     {{/each}}
 </table>
 <br class="myboth" />
