@@ -40,34 +40,36 @@
 		width: 40px;
 	}
 
-	.resultats{
+	.tableauxGestion{
 		margin:auto;
 		width: 90%;
 		text-align : center;
 		border:1px solid black;
-
+		border-collapse:collapse;
 	}
 
-	.resultats td{
+	.tableauxGestion td{
 		width: 100px;
 		border: 1px solid black;
-
+		padding: 10px 0px 10px 0px;
 	}
 
 	.enTeteAdmin {
 		margin:auto;
 		text-align: center;
+		margin-bottom: 50px;
 	}
 
 	.enTeteAdmin p{
 		font-weight: 900;
+		font-size:140%;
 	}
 
 
 	.enTeteAdminBis {
-		width: 900px;
+		width: 865px;
 		display:inline-block;
-		margin-bottom: 20px;
+		margin-bottom: 30px;
 		text-align: center;
 	}
 
