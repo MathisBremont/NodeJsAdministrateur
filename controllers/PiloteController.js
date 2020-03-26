@@ -1,5 +1,5 @@
 
-
+let model2 = require('../models/ecurie.js');
 let model = require('../models/pilote.js');
 let async = require('async');
 const {getNomPrenomAvecNum} = require("../models/pilote");
@@ -47,57 +47,34 @@ module.exports.ListerPilotes = function(request, response){
 };
 
 
-
-//TODO ce n'est que le début pour afficher le detail du pilote.
-module.exports.DetailDuPilote = function (request, response) {
-
-    let data = request.params.pilnum;
-    async.parallel([
-            function (callback) {
-                model.getPremiereLettreNomPilote(function (err, result) {
-                    callback(null, result)
-                });
-            },
-            function (callback) {
-                model.getDetailsPilote(data, function(errE, resE){
-                    callback(null, resE);
-                });
-            },
-            function(callback){
-                model.getSponsorsPilote(data, function(errE, resE){
-                    callback(null, resE);
-                });
-            },
-            function(callback){
-                model.getNomPrenomAvecNum(data, function(errE, resE){
-                    callback(null, resE);
-                });
-            },
-            function(callback){
-                model.getImagesDuPilote(data, function(errE, resE){
-                    callback(null, resE);
-                });
-            },
-        ],
-        function (err, result) {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            response.premiereLettre = result[0];
-            response.detailDuPilote = result[1][0];
-            //mettre [0] fait qu'on ne crée pas un tableau des résulttast qui sont retournés
-            //On utilise [0] quand on retourne une seule valeur pour eviter de faire un #each detailDuPilote dans detailDuPilote.handlebars
-
-            response.listeSponsors = result[2];
-
-            response.identite = result[3];
-            response.imagesPilote = result[4];
-            response.title = 'La page concernant ' + result[3][0].pilprenom + ' ' + result[3][0].pilnom;
-            response.render('detailDuPilote', response);
+module.exports.DetailDuPilote = function(request, response){
+    response.title = 'Détails pilote dans gestion des pilotes';
+    model.getDetailsPilote( function (err, result) {
+        if (err) {
+            // gestion de l'erreur
+            console.log(err);
+            return;
         }
-    )
+        response.detailDuPilote = result;
+        //console.log(result);
+        response.render('gestionDesPilotes', response);
+    });
 };
+
+module.exports.nomEcurie = function(request, response){
+    response.title = 'Nom des écuries';
+    model2.getNomEcurie( function (err, result) {
+        if (err) {
+            // gestion de l'erreur
+            console.log(err);
+            return;
+        }
+        response.nomEcurie = result;
+        //console.log(result);
+        response.render('ajouterPilote', response);
+    });
+};
+
 
 
 
