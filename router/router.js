@@ -19,9 +19,10 @@ module.exports = function (app) {
 
     // circuits
     app.get('/circuits', CircuitController.ListerCircuit);
-    app.get('/detailDuCircuit/:cirnum', CircuitController.DetailsDuCircuit);
+    app.post('/ajouterCircuit', CircuitController.AjouterCircuit);
+    app.get('/modifierCircuit', CircuitController.DetailsDuCircuit);
 
-// Ecuries
+    // Ecuries
     app.get('/ecuries', EcurieController.ListerEcurie);
     app.get('/detailEcurie/:ecunum', EcurieController.DetailEcurie);
 

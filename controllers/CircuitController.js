@@ -19,6 +19,34 @@ module.exports.ListerCircuit = function (request, response) {
     });
 }
 
+module.exports.AjouterCircuit = function (request, response) {
+    response.title = 'Liste des circuits';
+
+
+    var post = {
+        paysnum: request.body.paysnum,
+        cirnom: request.body.cirnom,
+        cirlongueur: request.body.cirlongueur,
+        cirnbspectateurs: request.body.cirnbspectateurs,
+        cirtext: request.body.cirtext
+
+    };
+
+
+    model.ajouterCircuit(post,function (err, result) {
+        if (err) {
+            // gestion de l'erreur
+            console.log(err);
+            return;
+        }
+        response.listeCircuit = result;
+        //console.log(result);
+        response.render('ajouterCircuit', response);
+    });
+}
+
+
+
 module.exports.DetailsDuCircuit = function (request, response) {
     let data = request.params.cirnum;
     async.parallel([
