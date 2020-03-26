@@ -1,0 +1,149 @@
+    body {
+    	font-family: "Segoe UI", "DejaVu Sans",Verdana, sans-serif;
+    	background: url('/image/fond.jpg') repeat;
+		  font-size:0.8em;
+    	margin: 0;
+    	padding: 0;
+    	text-align: center;
+    	color: #000000;
+    }
+    .monBody #container {
+    	width: 900px;
+    	margin: 0 auto;
+    	text-align: left;
+    	background:#ffffff;
+    }
+    .monBody #header {
+		    height:300px;
+    }
+	.monBody #menu {
+		height:22px;
+		color:#ffffff;
+		font-size:1.4em;
+		background:#000000;
+    }
+  .monBody #contenu {
+		 padding:20px;
+    }
+    .monBody #footer {
+    padding: 0 10px;
+		font-size:0.8em;
+		text-align:center;
+		height:150px;
+		background:url(/image/footer.jpg) no-repeat;
+    }
+	#menu a	{
+		color:#ffffff;
+		text-decoration:none;
+	}
+	.drapeaux{
+		width: 40px;
+	}
+
+	.resultats{
+
+		width: 50%;
+		text-align : center;
+
+	}
+
+	.resultats td{
+		width: 100px;
+		border: 1px solid black;
+
+	}
+
+	.resultats th{
+		font-weight: bold;
+		border: 1px solid black;
+	}
+
+  #menu {
+    text-align: center;
+  }
+  #LogoNode {
+      max-height: 20%;
+      max-width: 20%;
+  }
+  .tabpayscir  {
+ 	  float:right;
+ 	  padding:10px;
+ 	  border:1px solid black;
+ 	  margin:10px
+ 	  -moz-border-radius:15px;
+ 	  border-radius:15px;
+ }
+
+ .myboth  {
+ 	  clear:both;
+ }
+ a  {
+ 	text-decoration:none;
+ 	color:#0072ff;
+ }
+ .lienNotFound {align:center; style="background-color: #1d81b1;color: #FFFFFF;text-transform: uppercase;"}
+ .photoNotFound {
+   max-height: 40%;
+   max-width: 40%;
+}
+
+ .imagePiloteBtn{
+	 width: 150px;
+	 height: 150px;
+ }
+.lettre{
+	letter-spacing: 1em;
+}
+
+.imgProfilPilote{
+	width: 110px;
+	height: 110px;
+}
+
+.longTextPilote{
+	text-align: justify;
+}
+
+.listeImagesPilote{
+	width: 150px;
+	height: 150px;
+}
+
+.dernierResTab{
+	border-radius:10px;
+}
+.dernierRes{
+	padding-left : 10px;
+	padding-right : 10px;
+	line-height:5px;
+}
+
+.sponsor{
+	line-height:5px;
+}
+
+.imagesDuPilote{
+	display: flex;
+	justify-content: space-between;
+}
+
+.poidEtTaille{
+	padding-left: 30px;
+}
+
+.imgProfilEcurie{
+	width: 150px;
+	height: 150px;
+}
+
+.listeImagesVoitures{
+	width: 150px;
+	height: 150px;
+	display:inline-flex;
+	margin-right:20px;
+}
+
+	.profilPilote a {
+		display: inline-block;
+		padding-right: 10px;
+	}
