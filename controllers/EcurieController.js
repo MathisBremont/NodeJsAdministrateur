@@ -62,3 +62,31 @@ module.exports.DetailEcurie = function (request, response) {
     )
 };
 
+module.exports.DetailDeEcurie = function(request, response){
+    response.title = 'Détails ecurie dans gestion des ecuries';
+    model.getDetailsEcurie( function (err, result) {
+        if (err) {
+            // gestion de l'erreur
+            console.log(err);
+            return;
+        }
+        response.detailEcurie = result;
+        //console.log(result);
+        response.render('gestionDesEcuries', response);
+    });
+};
+
+module.exports.PasserAjouterEcurie = function(request, response){
+    response.title = 'Détails ecurie dans gestion des ecuries';
+    model.getDetailsEcurie( function (err, result) {
+        if (err) {
+            // gestion de l'erreur
+            console.log(err);
+            return;
+        }
+        response.detailEcurie = result;
+        //console.log(result);
+        response.render('ajouterEcurie', response);
+    });
+};
+

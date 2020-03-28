@@ -16,7 +16,6 @@ module.exports = function (app) {
     app.get('/repertoirePilote', PiloteController.Repertoire);
     app.get('/listerPilotes/:lettre', PiloteController.ListerPilotes);
     app.get('/gestionDesPilotes', PiloteController.DetailDuPilote);
-   /* app.get('/detailDuPilote/:pilnum', PiloteController.DetailDuPilote);*/
     app.get('/nomEcurie', PiloteController.nomEcurie);
 
     // circuits
@@ -27,6 +26,8 @@ module.exports = function (app) {
     // Ecuries
     app.get('/ecuries', EcurieController.ListerEcurie);
     app.get('/detailEcurie/:ecunum', EcurieController.DetailEcurie);
+    app.get('/gestionDesEcuries', EcurieController.DetailDeEcurie);
+    app.get('/ajouterEcurie', EcurieController.PasserAjouterEcurie)
 
     //Résultats
     app.get('/resultats', ResultatController.ListerResultat);
