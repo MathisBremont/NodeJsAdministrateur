@@ -1,0 +1,27 @@
+<form action="/modifierCircuit/{{circuit.cirnum}}" method="post">
+
+
+    <h1>Modifier un circuit</h1>
+
+
+    Nom <input type="text" class="login-field" name ="cirnom" value={{circuit.cirnom}}>
+    Longueur <input type="number" class="login-field" name ="cirlongueur" value={{circuit.cirlongueur}} min="1" max="100000">
+
+    Pays <select name="paynum">
+        <option value={{paysCircuit.paynum}}>{{paysCircuit.paynom}}</option>
+                {{#each listePays}}
+                    <option value={{this.paynum}}>{{this.paynom}}</option>
+                {{/each}}
+
+        </select>
+    Image <input type="file" class="login-field" name ="ciradresseimage" value={{circuit.ciradresseimage}} accept="image/png,image/jpeg" maxlength="
+                   20">
+
+
+    Nombre de spectateurs <input type="text" class="login-field" name ="cirnbspectateurs" value={{circuit.cirnbspectateurs}}>
+    Description <input type="text" class="login-field" name ="cirtext" value={{circuit.cirtext}}>
+
+
+    <input type="submit" name="inscription" class="" value="Modifier">
+
+</form>

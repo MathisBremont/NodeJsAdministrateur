@@ -20,8 +20,12 @@ module.exports = function (app) {
 
     // circuits
     app.get('/circuits', CircuitController.ListerCircuit);
+    app.get('/ajouterCircuit',CircuitController.ListerPays);
     app.post('/ajouterCircuit', CircuitController.AjouterCircuit);
-    app.get('/modifierCircuit', CircuitController.DetailsDuCircuit);
+    app.get('/modifierCircuit/:cirnum', CircuitController.DetailsDuCircuit);
+    app.post('/modifierCircuit/:cirnum', CircuitController.ModifierCircuit);
+    app.get('/supprimerCircuit/:cirnum',CircuitController.SupprimerCircuit);
+
 
     // Ecuries
     app.get('/ecuries', EcurieController.ListerEcurie);

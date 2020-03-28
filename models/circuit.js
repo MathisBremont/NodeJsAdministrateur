@@ -36,10 +36,91 @@ module.exports.ajouterCircuit = function (post,callback) {
             // execution de la requête SQL
 
 
-            let sql ="INSERT INTO circuit values "+post;
-            connexion.query(sql, callback);
+            let sql ="INSERT INTO circuit(paynum,cirnom,cirlongueur,cirnbspectateurs,ciradresseimage,cirtext) values (?,?,?,?,?,?)";
+            connexion.query(sql,post, callback);
 
             // la connexion retourne dans le pool
+            connexion.release();
+        }
+    });
+};
+
+module.exports.modifierCircuit = function (data,post,callback) {
+    // connection à la base
+    db.getConnection(function(err, connexion){
+        if(!err){
+            // s'il n'y a pas d'erreur de connexion
+            // execution de la requête SQL
+
+            let sql ="Update circuit set paynum=?,cirnom=?,cirlongueur=?,cirnbspectateurs=?,ciradresseimage=?,cirtext=? where cirnum="+data;
+            connexion.query(sql,post, callback);
+            // la connexion retourne dans le pool
+            connexion.release();
+        }
+    });
+};
+
+module.exports.listerPays = function (callback) {
+    // connection à la base
+    db.getConnection(function(err, connexion){
+        if(!err){
+            // s'il n'y a pas d'erreur de connexion
+            // execution de la requête SQL
+
+
+            let sql ="Select paynum,paynom from pays";
+            connexion.query(sql,callback);
+
+            // la connexion retourne dans le pool
+            connexion.release();
+        }
+    });
+};
+
+module.exports.getDetailsCircuit = function (data,callback) {
+    // connection à la base
+    db.getConnection(function(err, connexion){
+        if(!err){
+            // s'il n'y a pas d'erreur de connexion
+            // execution de la requête SQL
+
+
+            let sql ="Select cirnum,paynum,cirnom,cirlongueur,cirnbspectateurs,ciradresseimage,cirtext from circuit where cirnum="+data;
+            connexion.query(sql,callback);
+
+            // la connexion retourne dans le pool
+            connexion.release();
+        }
+    });
+};
+
+module.exports.getPaysCircuit = function (data,callback) {
+    // connection à la base
+    db.getConnection(function(err, connexion){
+        if(!err){
+            // s'il n'y a pas d'erreur de connexion
+            // execution de la requête SQL
+
+
+            let sql ="Select c.paynum,paynom from pays p inner join circuit c on c.paynum=p.paynum where c.cirnum="+data;
+            connexion.query(sql,callback);
+
+            connexion.release();
+        }
+    });
+};
+
+module.exports.supprimerCircuit = function (data,callback) {
+    // connection à la base
+    db.getConnection(function(err, connexion){
+        if(!err){
+            // s'il n'y a pas d'erreur de connexion
+            // execution de la requête SQL
+
+
+            let sql ="DELETE from circuit where cirnum ="+data;
+            connexion.query(sql,callback);
+
             connexion.release();
         }
     });
