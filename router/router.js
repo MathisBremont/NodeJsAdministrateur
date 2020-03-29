@@ -39,6 +39,9 @@ module.exports = function (app) {
     app.get('/resultats', ResultatController.ListerResultat);
     app.get('/saisirResultats/:gpnum',ResultatController.DetailsDuResultat);
     app.get('/gestionDesResultats', ResultatController.ListerGrandPrix);
+    app.post('/gestionDesResultats', ResultatController.ResultatsSelonGP);
+    app.get('/saisirResultats/:gpnum', ResultatController.ResultatsSelonGP);
+    /*app.post('saisirResultats/:gpnum', ResultatController.ResultatsSelonGP);*/
 
     //Sponsors
     app.get('/gestionDesSponsors', SponsorController.ListeSponsors);

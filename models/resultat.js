@@ -84,3 +84,36 @@
             }
         });
     };
+
+    module.exports.getPlaceEtPoints = function (callback) {
+        // connection à la base
+        db.getConnection(function (err, connexion) {
+            if (!err) {
+                // s'il n'y a pas d'erreur de connexion
+                // execution de la requête SQL
+                let sql = "SELECT ptplace, ptnbpointsplace from points order by ptplace asc" ;
+                connexion.query(sql, callback);
+
+                // la connexion retourne dans le pool
+                connexion.release();
+            }
+        });
+    };
+
+    module.exports.getResultatsSelonGrandPrix = function (post, callback) {
+        // connection à la base
+        db.getConnection(function (err, connexion) {
+            if (!err) {
+                // s'il n'y a pas d'erreur de connexion
+                // execution de la requête SQL
+                let sql = "SELECT gpnum, p.pilnum, pilnom, tempscourse from pilote p inner join course c on c.pilnum=p.pilnum where gpnum=? order by tempscourse  asc" ;
+
+                connexion.query(sql,post, callback);
+
+                // la connexion retourne dans le pool
+                connexion.release();
+            }
+        });
+    };
+
+
