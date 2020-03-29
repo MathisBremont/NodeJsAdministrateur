@@ -1,0 +1,33 @@
+<h1 align="center">Ajouter un sponsor</h1>
+<table>
+    <tr>
+        <td>
+            <p>Nom</p>
+        </td>
+        <td>
+            <input type="text" name="nomSponsor">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>Secteur d'activité</p>
+        </td>
+        <td>
+            <input type="text" name="sectActiviteSponsor">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>Ecurie sponsorisée</p>
+        </td>
+        <td>
+            <select>
+                <option value="aucune">Aucune</option>
+                {{#each listeEcurie}}
+                    <option value="{{this.ecunum}}">{{this.ecunom}}</option>
+                {{/each}}
+            </select>
+        </td>
+    </tr>
+</table>
+<input type="submit" content="AJOUTER">
