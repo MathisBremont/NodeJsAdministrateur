@@ -27,6 +27,7 @@ module.exports = function (app) {
     app.get('/supprimerCircuit/:cirnum',CircuitController.SupprimerCircuit);
 
 
+
     // Ecuries
     app.get('/ecuries', EcurieController.ListerEcurie);
     app.get('/detailEcurie/:ecunum', EcurieController.DetailEcurie);

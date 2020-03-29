@@ -120,7 +120,7 @@ module.exports.supprimerCircuit = function (data,callback) {
 
             let sql ="DELETE from circuit where cirnum ="+data;
             connexion.query(sql,callback);
-
+            console.log(sql);
             connexion.release();
         }
     });

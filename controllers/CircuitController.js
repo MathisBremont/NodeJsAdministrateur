@@ -135,28 +135,27 @@ module.exports.SupprimerCircuit = function (request, response) {
 
 
     async.parallel([
-            function (callback) {
-                model.getListeCircuits(data,function (err, result) {
-                    callback(null, result)
-                });
-            },
             function (callback){
-                model.supprimerCircuit(function (err, result) {
+                model.supprimerCircuit(data,function (err, result) {
                     callback(null, result)
                 });
             },
+            function (callback) {
+                model.getListeCircuits(function (err, result) {
+                    callback(null, result)
+                });
+            },
+
         ],
         function (err, result) {
             if (err) {
                 console.log(err);
                 return;
             }
-            response.circuit = result[0][0];
-            response.listePays = result[1];
-            response.paysCircuit = result[2][0];
+            response.listeCircuit = result[1];
 
 
-            response.redirect('gestionDesCircuits', response);
+            response.render('gestionDesCircuits', response);
         }
     )
 };
