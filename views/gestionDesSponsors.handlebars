@@ -1,0 +1,20 @@
+<div class="enTeteAdmin">
+    <img src="/image/cat_sponsor.png" alt="logo"/>
+    <h1>Gestion des sponsors</h1>
+    <a href="/ajouterSponsor"><img src="image/act_add.png"/> Ajouter un sponsor</a>
+</div>
+
+<table class="tableauxGestion">
+    <tr>
+        <th>Nom</th>
+        <th>Activité</th>
+        <th>Actions</th>
+    </tr>
+    {{#each listeSponsors}}
+        <tr>
+            <td>{{this.sponom}}</td>
+            <td>{{this.sposectactivite}}</td>
+            <td><a href=""><img src="/image/act_edit.png" alt="edit"/> Modifier</a>  <a href=""><img src="/image/act_delete.png" alt="delete"/> Supprimer</a></td>
+        </tr>
+    {{/each}}
+</table>

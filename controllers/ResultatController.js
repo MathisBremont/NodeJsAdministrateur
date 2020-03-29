@@ -43,9 +43,7 @@ module.exports.DetailsDuResultat = function (request, response) {
 
 			response.detailDuResultat = result[0];
 
-			console.log(response.detailDuResultat);
-
-			response.render('detailDuResultat', response);
+			response.render('saisirResultats', response);
 		}
 	)
 };
@@ -69,4 +67,22 @@ module.exports.Points=function(request,response){
 
 		response.render('detailDuResultat', response);
 	})
+}
+
+module.exports.ListerGrandPrix = function(request, response){
+
+	response.title = 'Liste des grands prix';
+	model.getGrandPrix( function (err, result) {
+		if (err) {
+			// gestion de l'erreur
+			console.log(err);
+			return;
+		}
+		response.listeResultats = result;
+		console.log(response.listeResultats);
+
+		response.render('gestionDesResultats', response);
+	});
+
+
 }

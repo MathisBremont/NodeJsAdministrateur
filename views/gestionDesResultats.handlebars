@@ -1,0 +1,15 @@
+<div class="enTeteAdmin">
+    <img src="/image/cat_resultat.png" alt="logo"/>
+    <h1>Résultats</h1>
+
+    <p>Sélectionner un grand prix :</p>
+    <select>
+        {{#each listeResultats}}
+            <option value="{{this.gpnum}}">{{this.gpnom}}</option>
+        {{/each}}
+    </select>
+    <br/>
+    <br/>
+    <input type="submit" content="VALIDER">
+</div>
+
