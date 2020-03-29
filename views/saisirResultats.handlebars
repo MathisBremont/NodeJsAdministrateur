@@ -19,8 +19,27 @@
         </th>
     </tr>
     <tr>
-        {{#each }}
 
+        {{#each placeEtPoints as |placeEtPoints|}}
+            {{#each resultatsSelonGP as |resultatsSelonGP|}}
+
+
+            <td>
+                <img src="/image/act_delete.png" alt="delete"/>
+            </td>
+            <td>
+                {{placeEtPoints.ptplace}}
+            </td>
+            <td>
+                {{resultatsSelonGP.pilnom}}
+            </td>
+            <td>
+                {{resultatsSelonGP.tempscourse}}
+            </td>
+                <td>
+                    {{placeEtPoints.ptnbpointsplace}}
+                </td>
+            {{/each}}
         {{/each}}
     </tr>
 </table>
