@@ -1,13 +1,15 @@
-<form action="/ajouterEcurie" method="post" class="addEcurie">
+<form action="/modifierEcurie/{{ecurie.ecunum}}" method="post">
     <h1 align="center">Ajouter une écurie</h1>
     <table>
+
+
 
         <tr>
             <td>
                 <p>Nom</p>
             </td>
             <td>
-                <input type="text" name="ecunom">
+                <input type="text" name="ecunom" value={{ecurie.ecunom}}>
             </td>
         </tr>
 
@@ -18,7 +20,7 @@
                 <p>Directeur</p>
             </td>
             <td>
-                <input type="text" name="ecunomdir">
+                <input type="text" name="ecunomdir" value="{{ecurie.ecunomdir}}">
             </td>
         </tr>
 
@@ -29,7 +31,7 @@
                 <p>Adresse du siège</p>
             </td>
             <td>
-                <input type="text" name="ecuadrsiege">
+                <input type="textarea" name="ecuadrsiege" value="{{ecurie.ecuadrsiege}}">
             </td>
         </tr>
 
@@ -40,7 +42,7 @@
                 <p>Points</p>
             </td>
             <td>
-                <p><input type="text" name="ecupoints"> pts</p>
+                <p><input type="text" name="ecupoints" value="{{ecurie.ecupoints}}"> pts</p>
             </td>
         </tr>
 
@@ -52,6 +54,7 @@
             </td>
             <td>
                 <select name="paynum">
+                    <option value={{paysEcurie.paynum}}>{{paysEcurie.paynom}}</option>
                     {{#each listePays}}
                         <option value={{this.paynum}}>{{this.paynom}}</option>
                     {{/each}}
@@ -68,6 +71,7 @@
             </td>
             <td>
                 <select name="fpnum">
+                    <option value={{fournEcurie.fpnum}}>{{fournEcurie.fpnom}}</option>
                     {{#each listeFourn}}
                         <option value={{this.fpnum}}>{{this.fpnom}}</option>
                     {{/each}}
@@ -83,13 +87,13 @@
                 <p>Image</p>
             </td>
             <td>
-                <input type="file" class="login-field" name="ecuadresseimage" value="" accept="image/png, image/jpeg" maxlength="20">
+                <input type="file"
+                       id="avatar" name="ecuadresseimage"
+                       accept="image/png, image/jpeg">
             </td>
         </tr>
 
-
-
     </table>
 
-    <input type="submit" value="AJOUTER">
+    <input type="submit" value="MODIFIER">
 </form>

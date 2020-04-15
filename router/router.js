@@ -1,7 +1,7 @@
 let LoginController = require('./../controllers/LoginController');
 let HomeController = require('./../controllers/HomeController');
 let ResultatController = require('./../controllers/ResultatController');
-let EcurieController = require('./../controllers/EcurieController');
+let EcurieController = require('../controllers/EcurieController');
 let PiloteController = require('./../controllers/PiloteController');
 let CircuitController = require('./../controllers/CircuitController');
 let SponsorController = require('./../controllers/SponsorController');
@@ -9,31 +9,48 @@ let SponsorController = require('./../controllers/SponsorController');
 // Routes
 module.exports = function (app) {
 
-// Main Routes
+    // Main Routes
     app.get('/', HomeController.DerniersResultats);
     app.get('/accueil', HomeController.DerniersResultats);
 
-// pilotes
-    app.get('/repertoirePilote', PiloteController.Repertoire);
-    app.get('/listerPilotes/:lettre', PiloteController.ListerPilotes);
-    app.get('/gestionDesPilotes', PiloteController.DetailDuPilote);
-    app.get('/nomEcurie', PiloteController.nomEcurie);
+    // pilotes
+    app.get('/gestionDesPilotes', PiloteController.ListerPilotes);
+
+    app.get('/ajouterPilote',PiloteController.FormAjoutPilote);
+    app.post('/ajouterPilote',PiloteController.AjouterPilote);
+
+    app.get('/modifierPilote/:pilnum',PiloteController.FormModifPilote);
+    app.post('/modifierPilote/:pilnum',PiloteController.ModifierPilote);
+
+    app.get('/supprimerPilote/:pilnum',PiloteController.SupprimerPilote);
+
+
 
     // circuits
-    app.get('/circuits', CircuitController.ListerCircuit);
-    app.get('/ajouterCircuit',CircuitController.ListerPays);
+    app.get('/gestionDesCircuits', CircuitController.ListerCircuits);
+
+    app.get('/ajouterCircuit',CircuitController.FormAjoutCircuit);
     app.post('/ajouterCircuit', CircuitController.AjouterCircuit);
-    app.get('/modifierCircuit/:cirnum', CircuitController.DetailsDuCircuit);
+
+    app.get('/modifierCircuit/:cirnum', CircuitController.FormModifCircuit);
     app.post('/modifierCircuit/:cirnum', CircuitController.ModifierCircuit);
+
     app.get('/supprimerCircuit/:cirnum',CircuitController.SupprimerCircuit);
 
 
 
+
     // Ecuries
-    app.get('/ecuries', EcurieController.ListerEcurie);
-    app.get('/detailEcurie/:ecunum', EcurieController.DetailEcurie);
-    app.get('/gestionDesEcuries', EcurieController.DetailDeEcurie);
-    app.get('/ajouterEcurie', EcurieController.PasserAjouterEcurie);
+    app.get('/gestionDesEcuries', EcurieController.ListerEcuries);
+
+    app.get('/ajouterEcurie',EcurieController.FormAjoutEcurie);
+    app.post('/ajouterEcurie', EcurieController.AjouterEcurie);
+
+    app.get('/modifierEcurie/:ecunum', EcurieController.FormModifEcurie);
+    app.post('/modifierEcurie/:ecunum', EcurieController.ModifierEcurie);
+
+    app.get('/supprimerEcurie/:ecunum',EcurieController.SupprimerEcurie);
+
 
     //Résultats
     app.get('/resultats', ResultatController.ListerResultat);

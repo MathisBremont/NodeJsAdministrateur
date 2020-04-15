@@ -1,13 +1,13 @@
 let db = require('../configDb');
 
 
-module.exports.getPremiereLettreNomPilote = function (callback) {
+module.exports.getListePilotes = function (callback) {
     // connection à la base
     db.getConnection(function(err, connexion){
         if(!err){
             // s'il n'y a pas d'erreur de connexion
             // execution de la requête SQL
-            let sql ="select distinct(left(pilnom, 1)) as lettre from pilote order by lettre";
+            let sql ="SELECT pilnum, paynum, pilnom, pilprenom,pildatenais,pilpigiste,pilpoints,pilpoids,piltaille,piltexte,ecunum FROM pilote ORDER BY pilnom";
             //console.log (sql);
             connexion.query(sql, callback);
 
@@ -17,14 +17,17 @@ module.exports.getPremiereLettreNomPilote = function (callback) {
     });
 };
 
-module.exports.getNomPilote = function(data, callback){
+module.exports.getDetailsPilote = function (data,callback) {
+    // connection à la base
     db.getConnection(function(err, connexion){
         if(!err){
             // s'il n'y a pas d'erreur de connexion
             // execution de la requête SQL
-            let sql ="select p.pilnum, pilnom, pilprenom, phoadresse from pilote p inner join photo ph on ph.pilnum=p.pilnum where pilnom like '"+ data +"%' and phonum = 1 order by 1 DESC";
-            //console.log (sql);
-            connexion.query(sql, callback);
+
+
+            let sql ="Select pilnum, paynum, pilnom, pilprenom,pildatenais,pilpigiste,pilpoints,pilpoids,piltaille,piltexte,ecunum from pilote where pilnum="+data;
+            connexion.query(sql,callback);
+
 
             // la connexion retourne dans le pool
             connexion.release();
@@ -32,15 +35,17 @@ module.exports.getNomPilote = function(data, callback){
     });
 };
 
-module.exports.getDetailsPilote = function( callback){
+
+module.exports.ajouterPilote = function (post,callback) {
+    // connection à la base
     db.getConnection(function(err, connexion){
         if(!err){
-
             // s'il n'y a pas d'erreur de connexion
             // execution de la requête SQL
-            let sql ="select pilnum, pilnom, pilprenom, pildatenais from pilote order by pilnom asc";
-            //console.log (sql);
-            connexion.query(sql, callback);
+
+
+            let sql ="INSERT INTO pilote(paynum,pilnom,pilprenom,pildatenais,pilpoints,pilpoids,piltaille,piltexte,ecunum) values (?,?,?,?,?,?,?,?,?)";
+            connexion.query(sql,post, callback);
 
             // la connexion retourne dans le pool
             connexion.release();
@@ -48,12 +53,68 @@ module.exports.getDetailsPilote = function( callback){
     });
 };
 
-module.exports.getSponsorsPilote = function(data, callback){
+module.exports.listerNatios = function (callback) {
+    // connection à la base
     db.getConnection(function(err, connexion){
         if(!err){
-            let sql="select sponom, sposectactivite from sponsorise sp inner join sponsor s on s.sponum=sp.sponum where pilnum="+data;
+            // s'il n'y a pas d'erreur de connexion
+            // execution de la requête SQL
 
-            connexion.query(sql, callback);
+
+            let sql ="Select paynum,paynat from pays order by paynat";
+            connexion.query(sql,callback);
+
+            // la connexion retourne dans le pool
+            connexion.release();
+        }
+    });
+};
+
+module.exports.getNatioPilote = function (data,callback) {
+    // connection à la base
+    db.getConnection(function(err, connexion){
+        if(!err){
+            // s'il n'y a pas d'erreur de connexion
+            // execution de la requête SQL
+
+
+            let sql ="Select pi.paynum,paynat from pays p inner join pilote pi on pi.paynum=p.paynum where pilnum="+data;
+            connexion.query(sql,callback);
+
+            connexion.release();
+        }
+    });
+};
+
+
+module.exports.listerEcuries = function (callback) {
+    // connection à la base
+    db.getConnection(function(err, connexion){
+        if(!err){
+            // s'il n'y a pas d'erreur de connexion
+            // execution de la requête SQL
+
+
+            let sql ="Select ecunum,ecunom from ecurie order by ecunom";
+            connexion.query(sql,callback);
+
+            // la connexion retourne dans le pool
+            connexion.release();
+        }
+    });
+};
+
+module.exports.getEcuPilote = function (data,callback) {
+    // connection à la base
+    db.getConnection(function(err, connexion){
+        if(!err){
+            // s'il n'y a pas d'erreur de connexion
+            // execution de la requête SQL
+
+
+            let sql ="Select p.ecunum,ecunom from ecurie e inner join pilote p on p.ecunum=e.ecunum where pilnum="+data;
+            connexion.query(sql,callback);
+
             connexion.release();
         }
     });
@@ -61,24 +122,34 @@ module.exports.getSponsorsPilote = function(data, callback){
 
 
 
-module.exports.getNomPrenomAvecNum = function(data, callback){
+module.exports.modifierPilote = function (data,post,callback) {
+    // connection à la base
     db.getConnection(function(err, connexion){
         if(!err){
-            let sql="select pilprenom, pilnom from pilote where pilnum="+data;
+            // s'il n'y a pas d'erreur de connexion
+            // execution de la requête SQL
 
-            connexion.query(sql, callback);
+            let sql ="Update pilote set paynum=?,pilnom=?,pilprenom=?,pildatenais=?,pilpoints=?,pilpoids=?,piltaille=?,piltexte=?,ecunum=? where pilnum="+data;
+            connexion.query(sql,post, callback);
+            // la connexion retourne dans le pool
+            console.log(sql);
             connexion.release();
         }
     });
 };
 
 
-module.exports.getImagesDuPilote = function(data, callback){
+
+module.exports.supprimerPilote = function (data,callback) {
+    // connection à la base
     db.getConnection(function(err, connexion){
         if(!err){
-            let sql="select phoadresse from photo where pilnum="+data+" and phonum!=1";
+            // s'il n'y a pas d'erreur de connexion
+            // execution de la requête SQL
 
-            connexion.query(sql, callback);
+
+            let sql ="DELETE from pilote where pilnum="+data;
+            connexion.query(sql,callback);
             connexion.release();
         }
     });

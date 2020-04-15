@@ -6,17 +6,21 @@
 
 <table class="tableauxGestion">
     <tr>
-        <th>Nom</th>
-        <th>Directeur</th>
-        <th>Points</th>
-        <th>Actions</th>
+        <td><b>Nom</b></td>
+        <td><b>Directeur</b></td>
+        <td><b>Points</b></td>
+        <td><b>Actions</b></td>
     </tr>
-    {{#each detailEcurie}}
+    {{#each listeEcuries}}
         <tr>
             <td>{{this.ecunom}}</td>
             <td>{{this.ecunomdir}}</td>
             <td>{{this.ecupoints}}</td>
-            <td><a href=""><img src="/image/act_edit.png" alt="edit"/> Modifier</a>  <a href=""><img src="/image/act_delete.png" alt="delete"/> Supprimer</a></td>
+
+            <td>
+                <a href="/modifierEcurie/{{this.ecunum}}"><img src="/image/act_edit.png" alt="edit"/> Modifier</a>
+                <a href="/supprimerEcurie/{{this.ecunum}}"><img src="/image/act_delete.png" alt="delete"/> Supprimer</a>
+            </td>
         </tr>
     {{/each}}
 </table>

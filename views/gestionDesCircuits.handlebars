@@ -1,11 +1,12 @@
 <div class="enTeteAdmin">
     <img src="/image/cat_circuit.png" alt="drapeau" />
     <p>Gestion des Circuits</p>
-</div>
-<div class="enTeteAdminBis">
     <img src="/image/act_add.png" alt="drapeau" />
     <a href="/ajouterCircuit">Ajouter un circuit</a>
 </div>
+
+
+
     <table class="tableauxGestion">
     <tr>
         <td><b>Nom</b></td>
@@ -13,16 +14,14 @@
         <td><b>Nombre de spéctateurs</b></td>
         <td><b>Actions</b></td>
     </tr>
-    {{#each listeCircuit}}
+    {{#each listeCircuits}}
         <tr>
             <td>{{this.cirnom}}</td>
             <td>{{this.cirlongueur}}</td>
             <td>{{this.cirnbspectateurs}}</td>
             <td>
-                <img src="/image/act_edit.png" alt="drapeau" />
-                <a href="/modifierCircuit/{{this.cirnum}}">Modifier</a>
-                <img src="/image/act_delete.png" alt="drapeau" />
-                <a href="/supprimerCircuit/{{this.cirnum}}">Supprimer</a>
+                <a href="/modifierCircuit/{{this.cirnum}}"><img src="/image/act_edit.png" alt="edit" /> Modifier</a>
+                <a href="/supprimerCircuit/{{this.cirnum}}"><img src="/image/act_delete.png" alt="delete" /> Supprimer</a>
             </td>
         </tr>
     {{/each}}

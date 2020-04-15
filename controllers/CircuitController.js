@@ -5,7 +5,7 @@ let model = require('../models/circuit.js');
 let async = require('async');
 
 
-module.exports.ListerCircuit = function (request, response) {
+module.exports.ListerCircuits = function (request, response) {
     response.title = 'Liste des circuits';
     model.getListeCircuits(function (err, result) {
         if (err) {
@@ -13,7 +13,7 @@ module.exports.ListerCircuit = function (request, response) {
             console.log(err);
             return;
         }
-        response.listeCircuit = result;
+        response.listeCircuits = result;
         //console.log(result);
         response.render('gestionDesCircuits', response);
     });
@@ -31,19 +31,35 @@ module.exports.AjouterCircuit = function (request, response) {
 
     var post = [paynum,cirnom,cirlongueur,cirnbspectateurs,ciradresseimage,cirtext];
 
+    async.parallel([
+            function (callback) {
+                model.listerPays(function (err, result) {
+                    callback(null, result)
+                });
+            },
+            function (callback){
+                model.ajouterCircuit(post,function (err, result) {
+                    callback(null, result)
+                });
+            },
 
-    model.ajouterCircuit(post, function (err, result) {
-        if (err) {
-            // gestion de l'erreur
-            console.log(err);
-            return;
+        ],
+        function (err, result) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            response.listePays = result[0];
+
+
+
+            response.render('ajouterCircuit', response);
         }
-        //console.log(result);
-        response.render('ajouterCircuit', response);
-    });
+    )
 }
 
 module.exports.ModifierCircuit = function (request, response) {
+
     let data = request.params.cirnum;
 
     var cirnom = request.body.cirnom;
@@ -56,22 +72,37 @@ module.exports.ModifierCircuit = function (request, response) {
     var post = [paynum,cirnom,cirlongueur,cirnbspectateurs,ciradresseimage,cirtext];
 
 
-    model.modifierCircuit(data,post, function (err, result) {
-        if (err) {
-            // gestion de l'erreur
-            console.log(err);
-            return;
+    async.parallel([
+            function (callback){
+                model.modifierCircuit(data,post,function (err, result) {
+                    callback(null, result)
+                });
+            },
+            function (callback) {
+                model.getListeCircuits(function (err, result) {
+                    callback(null, result)
+                });
+            },
+
+        ],
+        function (err, result) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            response.listeCircuits = result[1];
+
+
+            response.render('gestionDesCircuits', response);
         }
-        //console.log(result);
-        response.render('modifierCircuit', response);
-    });
+    )
 }
 
 
 
 
 
-module.exports.DetailsDuCircuit = function (request, response) {
+module.exports.FormModifCircuit = function (request, response) {
     let data = request.params.cirnum;
 
 
@@ -108,7 +139,7 @@ module.exports.DetailsDuCircuit = function (request, response) {
 };
 
 
-module.exports.ListerPays = function (request, response) {
+module.exports.FormAjoutCircuit = function (request, response) {
 
     response.title = 'Liste des circuits';
 
@@ -152,7 +183,7 @@ module.exports.SupprimerCircuit = function (request, response) {
                 console.log(err);
                 return;
             }
-            response.listeCircuit = result[1];
+            response.listeCircuits = result[1];
 
 
             response.render('gestionDesCircuits', response);

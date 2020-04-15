@@ -68,7 +68,7 @@ module.exports.listerPays = function (callback) {
             // execution de la requête SQL
 
 
-            let sql ="Select paynum,paynom from pays";
+            let sql ="Select paynum,paynom from pays order by paynom";
             connexion.query(sql,callback);
 
             // la connexion retourne dans le pool
@@ -118,9 +118,8 @@ module.exports.supprimerCircuit = function (data,callback) {
             // execution de la requête SQL
 
 
-            let sql ="DELETE from circuit where cirnum ="+data;
+            let sql ="DELETE from circuit where cirnum="+data;
             connexion.query(sql,callback);
-            console.log(sql);
             connexion.release();
         }
     });

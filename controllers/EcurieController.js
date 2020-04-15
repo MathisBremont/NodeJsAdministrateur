@@ -2,46 +2,50 @@ let model = require('../models/ecurie.js');
 let async = require('async');
    // //////////////////////// L I S T E R  E C U R I E S
 
-module.exports.ListerEcurie = function(request, response){
+module.exports.ListerEcuries = function(request, response){
    response.title = 'Liste des écuries';
-    model.getListeEcurie( function (err, result) {
+    model.getListeEcuries( function (err, result) {
         if (err) {
             // gestion de l'erreur
             console.log(err);
             return;
         }
-        response.listeEcurie = result;
+        response.listeEcuries = result;
 
-    response.render('listerEcurie', response);
+    response.render('gestionDesEcuries', response);
 });
 };
 
 
-module.exports.DetailEcurie = function (request, response) {
+
+
+module.exports.FormModifEcurie = function (request, response) {
     let data = request.params.ecunum;
+
+
     async.parallel([
             function (callback) {
-                model.getInfoEcurie(data,function (err, result) {
+                model.getDetailsEcurie(data,function (err, result) {
                     callback(null, result)
                 });
             },
             function (callback){
-                model.getPilotesLieAEcurie(data,function (err, result) {
+                model.listerPays(function (err, result) {
                     callback(null, result)
                 });
             },
             function (callback){
-                model.getVoituresLieAEcurie(data,function (err, result) {
+                model.getPaysEcurie(data,function (err, result) {
                     callback(null, result)
                 });
             },
             function (callback){
-                model.getListeEcurie(function (err, result) {
+                model.listerFourn(function (err, result) {
                     callback(null, result)
                 });
             },
             function (callback){
-                model.getFournisseurPneus(data,function (err, result) {
+                model.getFournEcurie(data,function (err, result) {
                     callback(null, result)
                 });
             },
@@ -51,42 +55,166 @@ module.exports.DetailEcurie = function (request, response) {
                 console.log(err);
                 return;
             }
-            response.detailEcurie = result[0][0];
-            response.listePilotesEcurie = result[1];
-            response.listeVoituresEcurie = result[2];
-            response.listeEcurie = result[3];
-            response.fournisseurPneus = result[4][0];
-            console.log(response.fournisseurPneus);
-            response.render('detailEcurie', response);
+            response.ecurie = result[0][0];
+            response.listePays = result[1];
+            response.paysEcurie = result[2][0];
+            response.listeFourn=result[3];
+            response.fournEcurie=result[4][0];
+
+
+            response.render('modifierEcurie', response);
         }
     )
 };
 
-module.exports.DetailDeEcurie = function(request, response){
-    response.title = 'Détails ecurie dans gestion des ecuries';
-    model.getDetailsEcurie( function (err, result) {
-        if (err) {
-            // gestion de l'erreur
-            console.log(err);
-            return;
+
+
+module.exports.FormAjoutEcurie = function (request, response) {
+    async.parallel([
+            function (callback) {
+                model.listerPays(function (err, result) {
+                    callback(null, result)
+                });
+            },
+            function (callback){
+                model.listerFourn(function (err, result) {
+                    callback(null, result)
+                });
+            },
+        ],
+        function (err, result) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            response.listePays = result[0];
+            response.listeFourn = result[1];
+
+
+
+            response.render('ajouterEcurie', response);
         }
-        response.detailEcurie = result;
-        //console.log(result);
-        response.render('gestionDesEcuries', response);
-    });
+    )
+
+
 };
 
-module.exports.PasserAjouterEcurie = function(request, response){
-    response.title = 'Détails ecurie dans gestion des ecuries';
-    model.getDetailsEcurie( function (err, result) {
-        if (err) {
-            // gestion de l'erreur
-            console.log(err);
-            return;
+
+
+module.exports.AjouterEcurie = function (request, response) {
+    response.title = 'Liste des circuits';
+
+    var fpnum = request.body.fpnum;
+    var ecunom = request.body.ecunom;
+    var ecunomdir = request.body.ecunomdir;
+    var ecuadrsiege = request.body.ecuadrsiege;
+    var ecupoints = request.body.ecupoints;
+    var paynum = request.body.paynum;
+    var ecuadresseimage = request.body.ecuadresseimage;
+
+    var post = [fpnum,ecunom,ecunomdir,ecuadrsiege,ecupoints,paynum,ecuadresseimage];
+
+
+    async.parallel([
+            function (callback){
+                model.ajouterEcurie(post,function (err, result) {
+                    callback(null, result)
+                });
+            },
+            function (callback) {
+                model.listerPays(function (err, result) {
+                    callback(null, result)
+                });
+            },
+            function (callback){
+                model.listerFourn(function (err, result) {
+                    callback(null, result)
+                });
+            },
+        ],
+        function (err, result) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            response.listePays = result[1];
+            response.listeFourn = result[2];
+
+
+
+            response.render('ajouterEcurie', response);
         }
-        response.detailEcurie = result;
-        //console.log(result);
-        response.render('ajouterEcurie', response);
-    });
+    )
+}
+
+module.exports.ModifierEcurie = function (request, response) {
+    let data = request.params.ecunum;
+
+    var fpnum = request.body.fpnum;
+    var ecunom = request.body.ecunom;
+    var ecunomdir = request.body.ecunomdir;
+    var ecuadrsiege = request.body.ecuadrsiege;
+    var ecupoints = request.body.ecupoints;
+    var paynum = request.body.paynum;
+    var ecuadresseimage = request.body.ecuadresseimage;
+
+    var post = [fpnum,ecunom,ecunomdir,ecuadrsiege,ecupoints,paynum,ecuadresseimage];
+
+    async.parallel([
+            function (callback){
+                model.modifierEcurie(data,post,function (err, result) {
+                    callback(null, result)
+                });
+            },
+            function (callback) {
+                model.getListeEcuries(function (err, result) {
+                    callback(null, result)
+                });
+            },
+
+        ],
+        function (err, result) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            response.listeEcuries = result[1];
+
+
+            response.render('gestionDesEcuries', response);
+        }
+    )
+}
+
+module.exports.SupprimerEcurie = function (request, response) {
+    let data = request.params.ecunum;
+    response.title = 'Liste des circuits';
+
+
+    async.parallel([
+            function (callback){
+                model.supprimerEcurie(data,function (err, result) {
+                    callback(null, result)
+                });
+            },
+            function (callback) {
+                model.getListeEcuries(function (err, result) {
+                    callback(null, result)
+                });
+            },
+
+        ],
+        function (err, result) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            response.listeEcuries = result[1];
+
+
+            response.render('gestionDesEcuries', response);
+        }
+    )
 };
+
 

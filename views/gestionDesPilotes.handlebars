@@ -1,22 +1,25 @@
 <div class="enTeteAdmin">
     <img src="/image/cat_pilote.png" alt="logo"/>
     <h1>Gestion des pilotes</h1>
-    <a href="/nomEcurie"><img src="image/act_add.png"/> Ajouter un pilote</a>
+    <a href="/ajouterPilote"><img src="image/act_add.png"/> Ajouter un pilote</a>
 </div>
 
 <table class="tableauxGestion">
-<tr>
-    <th>Nom</th>
-    <th>Prénom</th>
-    <th>Date de naissance</th>
-    <th>Actions</th>
-</tr>
-    {{#each detailDuPilote}}
+    <tr>
+        <td><b>Nom</b></td>
+        <td><b>Prénom</b></td>
+        <td><b>Date de naissance</b></td>
+        <td><b>Actions</b></td>
+    </tr>
+    {{#each listePilotes}}
         <tr>
             <td>{{this.pilnom}}</td>
             <td>{{this.pilprenom}}</td>
             <td>{{formatDate this.pildatenais 'DD/MM/YYYY'}}</td>
-            <td><a href=""><img src="/image/act_edit.png" alt="edit"/> Modifier</a>  <a href=""><img src="/image/act_delete.png" alt="delete"/> Supprimer</a></td>
+            <td>
+                <a href="modifierPilote/{{this.pilnum}}"><img src="/image/act_edit.png" alt="edit"/> Modifier</a>
+                <a href="supprimerPilote/{{this.pilnum}}"><img src="/image/act_delete.png" alt="delete"/> Supprimer</a>
+            </td>
         </tr>
     {{/each}}
 </table>
